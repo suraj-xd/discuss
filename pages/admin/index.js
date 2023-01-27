@@ -15,8 +15,8 @@ export default function AdminPostsPage(props) {
   return (
     <main>
       <AuthCheck>
+        <CreateNewPost /><br></br><br></br>
         <PostList />
-        <CreateNewPost />
       </AuthCheck>
     </main>
   );
@@ -31,7 +31,7 @@ function PostList() {
 
   return (
     <>
-      <h1>Manage your Posts</h1>
+      <h1 className='font-bold text-gray-500'>Manage your Posts</h1>
       <PostFeed posts={posts} admin />
     </>
   );
@@ -61,7 +61,7 @@ function CreateNewPost() {
       uid,
       username,
       published: false,
-      content: '# hello world!',
+      content: 'Your Blog Content Goes here..',
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
       heartCount: 0,
@@ -76,17 +76,18 @@ function CreateNewPost() {
   };
 
   return (
-    <form onSubmit={createPost}>
-      <input
+    <form className='bg-gray-300 rounded mt-3 p-5 border-gray-400 border-2' onSubmit={createPost}>
+      <input 
+        className='rounded bg-gray-200 mt-5 mb-3 pb-5 pt-5   placeholder:text-black placeholder:pl-2 placeholder:font-mono placeholder:font-bold font-mono font-bold text-black'
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="My Awesome Article!"
-        className={styles.input}
+        placeholder="Write a title"
+        // className={styles.input}
       />
-      <p>
+      {/* <p>
         <strong>Slug:</strong> {slug}
-      </p>
-      <button type="submit" disabled={!isValid} className="btn-green">
+      </p> */}
+      <button type="submit" disabled={!isValid} className="bg-blue-500 font-sans text-xl rounded-none text-white shadow">
         Create New Post
       </button>
     </form>

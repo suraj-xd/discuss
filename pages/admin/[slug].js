@@ -11,6 +11,9 @@ import { useForm } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import {
+  FolderRemoveIcon, UserRemoveIcon, UploadIcon, CameraIcon
+} from "@heroicons/react/solid";
 
 export default function AdminPostEdit(props) {
   return (
@@ -28,29 +31,45 @@ function PostManager() {
 
   const postRef = firestore.collection('users').doc(auth.currentUser.uid).collection('posts').doc(slug);
   const [post] = useDocumentDataOnce(postRef);
-
+  
   return (
-    <main className={styles.container}>
-      {post && (
-        <>
-          <section>
-            <h1>{post.title}</h1>
-            <p>ID: {post.slug}</p>
+    <>
+      <main className={styles.container}>
+        {post && (
+          <>
 
-            <PostForm postRef={postRef} defaultValues={post} preview={preview} />
-          </section>
+            <section>
+              <span className='flex mb-2'>
 
-          <aside>
-            <h3>Tools</h3>
-            <button onClick={() => setPreview(!preview)}>{preview ? 'Edit' : 'Preview'}</button>
-            <Link href={`/${post.username}/${post.slug}`}>
-              <button className="btn-blue">Live view</button>
-            </Link>
-            <DeletePostButton postRef={postRef} />
-          </aside>
-        </>
-      )}
-    </main>
+              <h1 className='font-sans font-bold rounded  p-2'>{post.title}</h1>
+              </span>
+                
+              {/* <p>ID: {post.slug}</p> */}
+
+              <button className='shadow-md shadow-gray-400   bg-gray-700 text-white ' onClick={() => setPreview(!preview)}>{preview ? 'Edit' : 'Preview'}</button>
+              <PostForm postRef={postRef} defaultValues={post} preview={preview} />
+            </section>
+          </>
+        )}
+      </main>
+// 
+      {/* <header  className="absolute   align-center bottom-2 border-b-blue-100 border-blue-100 border-2 rounded-2xl  z-60  bg-gray-100  items-center pt-2 p-2 ">
+      <div className="flex flex-grow">
+        <div className="flex space-x-8 md:space-x-6">
+          <div >
+        <button className='shadow-xl' onClick={() => setPreview(!preview)}>{preview ? 'Edit' : 'Preview'}</button>
+           
+          </div>
+          <div >
+        <DeletePostButton postRef={postRef} />
+          
+          </div>
+         
+
+        </div>
+      </div>
+    </header> */}
+    </>
   );
 }
 
@@ -58,6 +77,7 @@ function PostForm({ defaultValues, postRef, preview }) {
   const { register, errors, handleSubmit, formState, reset, watch } = useForm({ defaultValues, mode: 'onChange' });
 
   const { isValid, isDirty } = formState;
+  const router = useRouter();
 
   const updatePost = async ({ content, published }) => {
     await postRef.update({
@@ -65,10 +85,11 @@ function PostForm({ defaultValues, postRef, preview }) {
       published,
       updatedAt: serverTimestamp(),
     });
-
+    
     reset({ content, published });
-
+    
     toast.success('Post updated successfully!');
+    router.push('/admin');
   };
 
   return (
@@ -80,9 +101,9 @@ function PostForm({ defaultValues, postRef, preview }) {
       )}
 
       <div className={preview ? styles.hidden : styles.controls}>
-        <ImageUploader />
 
         <textarea
+          className='rounded bg-yellow-50 mt-2'
           name="content"
           ref={register({
             maxLength: { value: 20000, message: 'content is too long' },
@@ -91,16 +112,19 @@ function PostForm({ defaultValues, postRef, preview }) {
           })}
         ></textarea>
 
-        {errors.content && <p className="text-danger">{errors.content.message}</p>}
+        <ImageUploader />
+        {/* {errors.content && <p className="text-danger">{errors.content.message}</p>} */}
 
         <fieldset>
-          <input className={styles.checkbox} name="published" type="checkbox" ref={register} />
+          <input className="w-auto p-2 m-2 shadow " name="published" type="checkbox" ref={register} />
           <label>Published</label>
         </fieldset>
 
-        <button type="submit" className="btn-green" disabled={!isDirty || !isValid}>
+        <button type="submit" className="btn-green shadow-xl shadow-gray-200" disabled={!isDirty || !isValid}>
           Save Changes
         </button>
+        <DeletePostButton postRef={postRef} />
+
       </div>
     </form>
   );
@@ -119,8 +143,10 @@ function DeletePostButton({ postRef }) {
   };
 
   return (
-    <button className="btn-red" onClick={deletePost}>
-      Delete
-    </button>
+    <>
+      <button className="btn-red" onClick={deletePost}>
+        Delete
+      </button>
+    </>
   );
 }

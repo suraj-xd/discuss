@@ -1,10 +1,12 @@
 import { auth, firestore, googleAuthProvider } from '@lib/firebase';
 import { UserContext } from '@lib/context';
 import Metatags from '@components/Metatags';
-
+import Link from 'next/link';
 import { useEffect, useState, useCallback, useContext } from 'react';
 import debounce from 'lodash.debounce';
-
+import { useRouter } from 'next/router';
+import Login from '@components/Login';
+import { toast } from 'react-hot-toast';
 export default function Enter(props) {
   const { user, username } = useContext(UserContext);
 
@@ -27,19 +29,28 @@ function SignInButton() {
 
   return (
     <>
-      <button className="btn-google" onClick={signInWithGoogle}>
+      {/* <button className="btn-google" onClick={signInWithGoogle}>
         <img src={'/google.png'} width="30px" /> Sign in with Google
-      </button>
-      <button onClick={() => auth.signInAnonymously()}>
+      </button> */}
+      <Login />
+      {/* <button onClick={() => auth.signInAnonymously()}>
         Sign in Anonymously
-      </button>
+      </button> */}
     </>
   );
 }
 
 // Sign out button
 function SignOutButton() {
-  return <button onClick={() => auth.signOut()}>Sign Out</button>;
+  const router = useRouter();
+  toast.success("Welcome!")
+  router.push('/');
+  return (
+    <Link href={`/`}>
+      <h1 className='text-center font-mono ' >Redirectering to Home Page..⏳.</h1>
+    </Link>
+  )
+
 }
 
 // Username form
@@ -106,7 +117,8 @@ function UsernameForm() {
   );
 
   return (
-    !username && (
+    <>
+      {/* !username && (
       <section>
         <h3>Choose Username</h3>
         <form onSubmit={onSubmit}>
@@ -126,17 +138,36 @@ function UsernameForm() {
           </div>
         </form>
       </section>
-    )
+
+      ) */}
+      <>
+        <form class="w-full max-w-sm m-auto flex h-screen    "  onSubmit={onSubmit}>
+          <div class="flex items-center   py-2 ">
+
+            <span className='bg-white border-1 border-gray-50  p-5 rounded-xl shadow-md shadow-gray-400'>
+
+            <input spellcheck="false" value={formValue} onChange={onChange} class="text-black caret-yellow-900 appearance-none bg-gray-200 rounded-sm placeholder:text-black font-sans font-bold lowercasenpm run dev pl-2 border-none w-full  mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="username" aria-label="Full name"></input>
+            <UsernameMessage username={formValue} isValid={isValid} loading={loading} />
+            <button type="submit" disabled={!isValid} class="flex-shrink-0 bg-black hover:bg-gray-600   text-sm  text-white py-1 px-2 rounded" >
+            Choose
+            </button>
+            </span>
+              
+          </div>
+        </form>
+      </>
+    </>
   );
 }
 
 function UsernameMessage({ username, isValid, loading }) {
+  
   if (loading) {
-    return <p>Checking...</p>;
+    return <p className='font-mono text-sm  font-semibold pt-2 text-gray-400 pr-1'>Checking...</p>;
   } else if (isValid) {
-    return <p className="text-success">{username} is available!</p>;
+    return <p className="font-mono text-sm font-semibold pt-2 text-green-400"> <span className='font-sans font-bold text-blue-400'>@{username}</span> is available!</p>;
   } else if (username && !isValid) {
-    return <p className="text-danger">That username is taken!</p>;
+    return <p className="font-mono text-sm  font-semibold pt-2 text-red-400">That username is taken!</p>;
   } else {
     return <p></p>;
   }

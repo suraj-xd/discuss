@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital@0;1&family=Unbounded:wght@500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root {
   --color-bg: #eef0f1;
   --color-text: #08090a;
@@ -12,14 +16,17 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Kanit', sans-serif;
   background-color: var(--color-bg);
   color: var(--color-text);
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 
+.mainfont{
+  font-family: 'Unbounded', sans-serif;
 
+}
 main {
   padding: 1rem 10vw;
 }
@@ -68,7 +75,7 @@ code {
   color: var(--colors-text);
   position: fixed;
   top: 0;
-  padding: 0 10vw;
+  padding: 0 3vw;
   font-weight: bold;
   border-bottom: 1px solid var(--color-gray);
   z-index: 99;
@@ -80,7 +87,7 @@ code {
   padding: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   height: 100%;
 }
 
@@ -172,8 +179,7 @@ button.btn-logo {
   padding: 2rem;
   margin: 1rem 0;
   background-color: white;
-  border: 1px solid var(--color-gray);
-  border-radius: 8px;
+  /* border-left: 30px; */
 }
 
 .card footer {
@@ -185,9 +191,17 @@ button.btn-logo {
   display:block;
   margin:auto;
   border-radius: 50%;
-  max-width: 150px;
+  max-width: 50px;
 }
 
+.upicon{
+  transform: rotate(180deg);
+  transition: transform 0.5s ;
+}
+.downicon{
+  transform: rotate(0deg);
+  transition: transform 0.5s ;
+}
 .card-info {
   color: white;
   background: var(--color-blue);
@@ -260,3 +274,27 @@ input[type="file"] {
 }
 
 .hidden { display:  none; }
+
+
+.cardComment {
+  display:flex;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: white;
+  border: 1px solid var(--color-gray);
+  border-radius: 8px;
+  list-style-type: none;
+}
+
+.cardCommentInput {
+  
+  border: 1px solid var(--color-gray);
+  border-radius: 8px;
+  list-style-type: none;
+}
+
+.icon {
+  @apply  p-1 h-9 w-9  mt-7 m-2 rounded-full cursor-pointer hover:bg-gray-300;
+}
+
+

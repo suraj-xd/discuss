@@ -1,12 +1,11 @@
 import { firestore, auth, increment } from '@lib/firebase';
-import { useDocument } from 'react-firebase-hooks/firestore';
-
+import {  useDocument } from 'react-firebase-hooks/firestore';
 // Allows user to heart or like a post
+
 export default function Heart({ postRef }) {
-  // Listen to heart document for currently logged in user
+
   const heartRef = postRef.collection('hearts').doc(auth.currentUser.uid);
   const [heartDoc] = useDocument(heartRef);
-
   // Create a user-to-post relationship
   const addHeart = async () => {
     const uid = auth.currentUser.uid;
@@ -14,7 +13,6 @@ export default function Heart({ postRef }) {
 
     batch.update(postRef, { heartCount: increment(1) });
     batch.set(heartRef, { uid });
-
     await batch.commit();
   };
 
@@ -28,9 +26,19 @@ export default function Heart({ postRef }) {
     await batch.commit();
   };
 
-  return heartDoc?.exists ? (
-    <button onClick={removeHeart}>💔 Unheart</button>
-  ) : (
-    <button onClick={addHeart}>💗 Heart</button>
+  
+
+
+  return (
+
+    <>
+      {heartDoc?.exists ? (
+        <img src={'/upicon.png'} onClick={removeHeart} className="card-img-center downicon bg-green-400" />
+        // <ArrowNarrowUpIcon  onClick={removeHeart} className='icon text-white  bg-green-400'/>
+      ) : (
+        <img src={'/upicon.png'} onClick={addHeart} className="card-img-center upicon bg-gray-300 " />
+        
+      )}
+    </>
   );
 }

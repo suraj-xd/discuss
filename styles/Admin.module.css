@@ -46,8 +46,8 @@
 }
 
 .checkbox {
-  display: inline;
-  width: auto;
+  /* display: inline;
+  width: auto; */
 }
 
 @media only screen and (max-width: 768px) {

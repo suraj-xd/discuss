@@ -6,7 +6,7 @@ export default function UserProfile({ user }) {
       <p>
         <i>@{user.username}</i>
       </p>
-      <h1>{user.displayName || 'Anonymous User'}</h1>
+      <h1 className="font-sans font-bold text-gray-800">{user.displayName || 'Anonymous User'}</h1>
     </div>
   );
 }

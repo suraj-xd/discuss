@@ -2,8 +2,13 @@ import { getUserWithUsername, postToJSON } from '@lib/firebase';
 import UserProfile from '@components/UserProfile';
 import Metatags from '@components/Metatags';
 import PostFeed from '@components/PostFeed';
-
-
+import {
+  LogoutIcon
+} from "@heroicons/react/solid";
+import { UserContext } from '@lib/context';
+import { useRouter } from 'next/router';
+import { auth } from '@lib/firebase';
+import { useState , useContext} from 'react';
 export async function getServerSideProps({ query }) {
   const { username } = query;
 
@@ -36,11 +41,30 @@ export async function getServerSideProps({ query }) {
 }
 
 export default function UserProfilePage({ user, posts }) {
+  const { use, username } = useContext(UserContext);
+
+  const router = useRouter();
+  const signOut = () => {
+    auth.signOut();
+    router.reload();
+  }
   return (
     <main>
       <Metatags title={user.username} description={`${user.username}'s public profile`} />
       <UserProfile user={user} />
+      
       <PostFeed posts={posts} />
+      <br></br>
+      {username && <>
+          <span className='flex'>
+          <p className='font-bold ml-4 mt-8'>Sign Out</p>
+          <LogoutIcon onClick={signOut} className='bg-gray-400 text-white icon' />
+
+          </span>
+      </>
+          
+      }
+      <br></br><br></br>
     </main>
   );
 }
