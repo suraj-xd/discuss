@@ -52,9 +52,7 @@ export default function Home(props) {
     
     if (newPosts.length < LIMIT) {
       setPostsEnd(true);
-      setTimeout(() => {
-        toast("No More Posts!",{"icon":"🕸️"});
-      }, 600);
+      
     }
   };
   useEffect(() => {
@@ -79,7 +77,7 @@ export default function Home(props) {
 
       {/* {!loading && !postsEnd && <button onClick={getMorePosts}>Load More</button>} */}
       {/* <Loader show={loading} /> */}
-      {/* {postsEnd && <p className='text-center '>You have reached the End! 🕸️</p>} */}
+      {postsEnd && <p className='text-center '>You have reached the End! 🕸️</p>}
 
     </main>
       <Footer/>
