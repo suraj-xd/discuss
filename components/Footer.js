@@ -4,7 +4,7 @@ export default function Footer() {
 
         <footer class="p-4 bg-white shadow md:px-6 md:py-8 dark:bg-gray-900">
             <div class="sm:flex sm:items-center sm:justify-between">
-                <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0">
+                <a href="https://crackdsa.com/" class="flex items-center mb-4 sm:mb-0">
                     {/* <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" /> */}
                     <span class="self-center text-2xl  whitespace-nowrap dark:text-white text-bold">crack<strong className="text-extrabold text-blue-700">DSA</strong> </span>
                 </a>

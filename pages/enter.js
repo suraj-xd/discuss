@@ -13,10 +13,15 @@ export default function Enter(props) {
   // 1. user signed out <SignInButton />
   // 2. user signed in, but missing username <UsernameForm />
   // 3. user signed in, has username <SignOutButton />
+  const alreadyUser = (user && username) ;
+  const makeUsername = user  && (!username);
+  const noUser = !user;
   return (
     <main>
-      <Metatags title="Enter" description="Sign up for this amazing app!" />
-      {user ? !username ? <UsernameForm /> : <SignOutButton /> : <SignInButton />}
+      <Metatags title="Login with Google" description="Login for Discuss.crackDSA" />
+      {alreadyUser && <SignOutButton />}
+      {makeUsername && <UsernameForm />}
+      {noUser && <SignInButton />}
     </main>
   );
 }
