@@ -55,10 +55,10 @@ export default function Comments({ postRef }) {
             </li>
             <br></br>
             <ul>
-
+                {(realtimePosts?.size > 0)  ? <h1 className='p-4 pt-0'>{realtimePosts?.size} Comment{realtimePosts?.size==1 ? "" : "s"}</h1> : <p className='text-center text-gray-600'>No comments here! Be the first one to comment.</p>}
                 {   
                     
-                    !loading && realtimePosts?.docs.map((doc) => {
+                    !loading &&  realtimePosts?.docs.map((doc) => {
                         return (
                             <>
                                 <li  key={Math.random()} className='ml-3 mr-3 border-t-2 border-gray-200 '>

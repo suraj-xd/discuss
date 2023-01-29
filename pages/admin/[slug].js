@@ -51,7 +51,6 @@ function PostManager() {
           </>
         )}
       </main>
-// 
       {/* <header  className="absolute   align-center bottom-2 border-b-blue-100 border-blue-100 border-2 rounded-2xl  z-60  bg-gray-100  items-center pt-2 p-2 ">
       <div className="flex flex-grow">
         <div className="flex space-x-8 md:space-x-6">
@@ -122,7 +121,7 @@ function PostForm({ defaultValues, postRef, preview }) {
         <button type="submit" className="btn-green shadow-xl shadow-gray-200" disabled={!isDirty || !isValid}>
           Save Changes
         </button>
-        <DeletePostButton postRef={postRef} />
+        <DeletePostButton postRef={postRef} /> 
 
       </div>
     </form>
