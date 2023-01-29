@@ -28,7 +28,7 @@ body {
 
 }
 main {
-  padding: 1rem 5vw;
+  padding: 1rem 2vw;
 }
 
 h1 { font-size: 2rem; }
@@ -176,7 +176,7 @@ button.btn-logo {
 /* Cards */
 
 .card {
-  padding: 2rem;
+  padding: 1.4rem;
   margin: 1rem 0;
   background-color: white;
   /* border-left: 30px; */

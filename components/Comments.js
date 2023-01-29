@@ -61,7 +61,7 @@ export default function Comments({ postRef }) {
                     !loading && realtimePosts?.docs.map((doc) => {
                         return (
                             <>
-                                <li key={Math.random()} className='ml-3 mr-3    '>
+                                <li  key={Math.random()} className='ml-3 mr-3 border-t-2 border-gray-200 '>
 
                                     
                                     
@@ -73,6 +73,7 @@ export default function Comments({ postRef }) {
                                         replyFlag = {false}
                                     />
                                     <Replies  currentUser={doc.data()?.username} commentRef={postRef.collection('comments').doc(doc.id)} />
+                                    <hr></hr>
                                 </li>
                             </>
 
