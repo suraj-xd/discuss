@@ -49,7 +49,11 @@ export default function Comments({ postRef }) {
 
             <li className='cardCommentInput p-3 m-3 bg-white'>
                 <form onSubmit={handleSubmit}>
+                    <span className='flex'>
+
+                    {username &&   <img className='rounded-full p-1 '  width={45} height={40} src={user?.photoURL || '/hacker.png'} /> }
                     <input placeholder='Type your views..' className='text-base border-black rounded bg-gray-200 p-3 m-0'  ref={name} />
+                    </span>
                     <button className='bg-blue-600 text-white p-3 pr-6 pl-6'  type="submit">Comment</button>
                 </form>
             </li>

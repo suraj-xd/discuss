@@ -13,7 +13,7 @@ function Demo({ username, photoURL, comment, timestamp, replyFlag }) {
                             </Link>
                             <div>
                             <Link href={`/${username}/`}>
-                                <p  className="cursor-pointer font-sans  font-bold text-gray-900 ">@{username}</p>
+                                <p  className="cursor-pointer font-sans  font-semibold text-blue-600 ">@{username}</p>
                             </Link>
                                 {timestamp ? (
                                     <p className="text-xs text-black">
@@ -25,7 +25,7 @@ function Demo({ username, photoURL, comment, timestamp, replyFlag }) {
                             </div>
                         </div>
 
-                        <p className="pt-4 text-black">{comment}</p>
+                        <p className="pt-4 text-black font-bold">{comment}</p>
                     </div>
                 </div>
             </li>
