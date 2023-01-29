@@ -1,20 +1,20 @@
-import styles from '@styles/Admin.module.css';
 import AuthCheck from '@components/AuthCheck';
 import PostFeed from '@components/PostFeed';
 import { UserContext } from '@lib/context';
 import { firestore, auth, serverTimestamp } from '@lib/firebase';
-
 import { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { useCollection } from 'react-firebase-hooks/firestore';
 import kebabCase from 'lodash.kebabcase';
 import toast from 'react-hot-toast';
+import Link from 'next/link';
+import Login from '@components/Login';
 
 export default function AdminPostsPage(props) {
   return (
     <main>
-      <AuthCheck>
+      <AuthCheck fallback={<Link href="/enter"><Login/></Link>}>
         <CreateNewPost /><br></br><br></br>
         <PostList />
       </AuthCheck>
@@ -78,7 +78,7 @@ function CreateNewPost() {
   return (
     <form className='bg-gray-300 rounded mt-3 p-5 border-gray-400 border-2' onSubmit={createPost}>
       <input 
-        className='rounded bg-gray-200 mt-5 mb-3 pb-5 pt-5   placeholder:text-black placeholder:pl-2 placeholder:font-mono placeholder:font-bold font-mono font-bold text-black'
+        className='rounded bg-gray-200 mt-5 mb-3 pb-5 pt-5   placeholder:text-white placeholder:pl-2 placeholder:font-mono placeholder:font-bold font-mono font-bold text-black'
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Write a title"

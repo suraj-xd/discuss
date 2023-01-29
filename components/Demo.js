@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 function Demo({ username, photoURL, comment, timestamp, replyFlag }) {
     const favorite = false;

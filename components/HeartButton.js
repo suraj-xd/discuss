@@ -33,7 +33,7 @@ export default function Heart({ postRef }) {
 
     <>
       {heartDoc?.exists ? (
-        <img src={'/upicon.png'} onClick={removeHeart} className="card-img-center downicon bg-green-400" />
+        <img src={'/upicon.png'} onClick={removeHeart} className="card-img-center downicon bg-green-400 p-1" />
         // <ArrowNarrowUpIcon  onClick={removeHeart} className='icon text-white  bg-green-400'/>
       ) : (
         <img src={'/upicon.png'} onClick={addHeart} className="card-img-center upicon bg-gray-300 " />

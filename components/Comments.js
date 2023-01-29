@@ -32,7 +32,7 @@ export default function Comments({ postRef }) {
             return;
         }
         const uid = auth.currentUser.uid;
-        const da = await postRef.collection('comments').add({
+        await postRef.collection('comments').add({
             uid,
             comment: name.current.value,
             username: username,
@@ -45,7 +45,7 @@ export default function Comments({ postRef }) {
     return (
 
         <>
-
+    
 
             <li className='cardCommentInput p-3 m-3 bg-white'>
                 <form onSubmit={handleSubmit}>
@@ -56,8 +56,9 @@ export default function Comments({ postRef }) {
             <br></br>
             <ul>
 
-                {
-                    realtimePosts?.docs.map((doc) => {
+                {   
+                    
+                    !loading && realtimePosts?.docs.map((doc) => {
                         return (
                             <>
                                 <li key={Math.random()} className='ml-3 mr-3    '>

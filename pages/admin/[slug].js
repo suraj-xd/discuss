@@ -11,13 +11,12 @@ import { useForm } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
-import {
-  FolderRemoveIcon, UserRemoveIcon, UploadIcon, CameraIcon
-} from "@heroicons/react/solid";
+
+import Login from '@components/Login';
 
 export default function AdminPostEdit(props) {
   return (
-    <AuthCheck>
+    <AuthCheck fallback={<Link href="/enter"><Login/></Link>}>
       <PostManager />
     </AuthCheck>
   );

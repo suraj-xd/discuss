@@ -50,7 +50,7 @@ export default function Replies({ commentRef, currentUser }) {
             <ul className='object-right ml-10'>
             
                 {
-                    realtimePosts?.docs.map((doc) => {
+                   !loading &&  realtimePosts?.docs.map((doc) => {
                         return (
                             <li >
 

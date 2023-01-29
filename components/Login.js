@@ -5,12 +5,12 @@ function Login() {
     await auth.signInWithPopup(googleAuthProvider);
   };
     return (
-        <div className="">
+        <div className="cursor-pointer">
 
             <div className="flex items-center justify-center h-screen">
 
                 <h1
-                    className="p-5 m-2 w-25 font-sans font-light  bg-black rounded-3xl text-white text-center  cursor-pointer"
+                    className="p-5 m-2 w-25  mainfont  bg-black  text-white text-center  cursor-pointer"
                     onClick={signInWithGoogle}
                 >
                     Login
@@ -21,7 +21,7 @@ function Login() {
                 >
                     using
                 </h4>
-                <div className="inline-flex p-3 m-2 cursor-pointer">
+                <div className="inline-flex p-3 m-2 cursor-pointer border-2 rounded-full">
                     <img className="h-9 w-9 m-1"
                         src="https://cdn-icons-png.flaticon.com/512/104/104093.png"
                         height={400}

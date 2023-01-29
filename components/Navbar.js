@@ -15,7 +15,7 @@ export default function Navbar() {
         <li className='flex '>
           <Link href="/">
               <button  className='bg-black'> <span className=' text-white font-mono text-md '>DISCUSS</span>
-              <span className='hidden sm:flex text-blue-300 font-sans pl-1 pb-1 text-base font-extrabold'> .crackDSA</span>
+              <span className='text-blue-300 font-sans pl-1 pb-1 text-base font-extrabold'> .crackDSA</span>
               </button>  
           
           </Link>
@@ -28,7 +28,7 @@ export default function Navbar() {
             <li className='absolute right-16 mr-1 font-mono '>
               <Link href="/admin">
                 <h3 className='bg-black text-white p-3 hover:bg-gray-800 shadow-sm shadow-blue-400  rounded-b-xl cursor-pointer'>
-                  ✒️ Write Posts
+                  ✒️ <span className=  'hidden sm:inline'>Write Posts</span> 
                 </h3>
                 {/* <button className="btn-blue">Write Posts</button> */}
               </Link>
@@ -45,7 +45,7 @@ export default function Navbar() {
         {!username && (
           <li>
             <Link href="/enter">
-              <button className="btn-blue">Log in</button>
+              <button className="rounded-none bg-purple-500  text-white mainfont font-light">Get in 😶‍🌫️</button>
             </Link>
           </li>
         )}

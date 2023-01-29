@@ -7,7 +7,7 @@ import { useState , useEffect} from 'react';
 import { toast } from 'react-hot-toast';
 
 // Max post to query per page
-const LIMIT = 4;
+const LIMIT = 10;
 
 export async function getServerSideProps(context) {
   const postsQuery = firestore
@@ -49,12 +49,10 @@ export default function Home(props) {
     setLoading(false);
     
     if (newPosts.length < LIMIT) {
+      toast("No More Posts!",{"icon":"🕸️"});
       setPostsEnd(true);
     }
   };
-  if(postsEnd){
-    toast("No More Posts!",{"icon":"🕸️"});
-  }
   useEffect(() => {
     const onScroll = function () {
        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
