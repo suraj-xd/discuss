@@ -17,7 +17,7 @@ function PostItem({ post, admin = false }) {
       </Link>
 
       <Link href={`/${post.username}/${post.slug}`}>
-        <span onClick={()=>toast("Loading...",{"icon":"📺"})}>
+        <span >
         <h1 className='border-l-2 text-base sm:text-3xl   border-green-400 pl-2 mt-2 mainfont'>
           <a className='' >{post.title}</a>
         </h1>
