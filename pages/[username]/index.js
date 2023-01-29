@@ -49,7 +49,7 @@ export default function UserProfilePage({ user, posts }) {
     router.reload();
   }
   return (
-    <main>
+    <main className='bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 '>
       <Metatags title={user.username} description={`${user.username}'s public profile`} />
       <UserProfile user={user} />
       

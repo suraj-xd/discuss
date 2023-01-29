@@ -10,7 +10,6 @@ import { useContext } from 'react';
 // UI component for main post content
 export default function PostContent({ post, postRef }) {
   const { user: currentUser } = useContext(UserContext);
-  const createdAt = typeof post?.createdAt === 'number' ? new Date(post.createdAt) : post.createdAt.toDate();
   return (
     <div className="card">
       <h1 className=''>{post?.title}</h1>
@@ -19,7 +18,7 @@ export default function PostContent({ post, postRef }) {
         <Link href={`/${post.username}/`}>
           <a className="text-info">@{post.username}</a>
         </Link>{' '}
-        on {createdAt.toISOString()}
+        on {new Date(post.createdAt?.toDate()).toLocaleString()}
       </span><br></br><hr></hr><br></br>
       <ReactMarkdown>{post?.content}</ReactMarkdown>
       {/* // experimental */}

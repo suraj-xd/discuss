@@ -1,8 +1,6 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { UserContext } from '@lib/context';
-import { auth } from '@lib/firebase';
 
 // Top navbar
 export default function Navbar() {
@@ -14,10 +12,15 @@ export default function Navbar() {
       <ul>
         <li className='flex '>
           <Link href="/">
-              <button  className='bg-black'> <span className=' text-white font-mono text-md '>DISCUSS</span>
+              {/* <button  className='bg-black'> <span className=' text-white font-mono text-md '>DISCUSS</span>
               <span className='text-blue-300 font-sans pl-1 pb-1 text-base font-extrabold'> .crackDSA</span>
-              </button>  
-          
+              </button>   */}
+            <a href="https://crackdsa.com/" class="flex items-center mb-4 sm:mb-0 mr-7">
+                    {/* <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" /> */}
+                    <span class="self-center text-2xl  whitespace-nowrap dark:text-white border-4 p-1 rounded-r-md border-blue-900 hover:bg-blue-900 hover:text-white">DISCUSS </span>
+                   
+                    <span class="self-center text-2xl  whitespace-nowrap dark:text-white text-bold pl-1">crack<strong className="text-extrabold text-blue-700">DSA</strong> </span>
+                </a>
           </Link>
         </li>
 

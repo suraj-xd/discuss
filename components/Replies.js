@@ -14,7 +14,7 @@ export default function Replies({ commentRef, currentUser }) {
     const name = useRef();
     const { user, username } = useContext(UserContext);
     const [realtimePosts, loading, error] = useCollection(
-        commentRef.collection('replies').orderBy("timestamp", "desc")
+        commentRef.collection('replies').orderBy("timestamp")
     );
 
 

@@ -52,7 +52,9 @@ export default function Home(props) {
     
     if (newPosts.length < LIMIT) {
       setPostsEnd(true);
-      toast("No More Posts!",{"icon":"🕸️"});
+      setTimeout(() => {
+        toast("No More Posts!",{"icon":"🕸️"});
+      }, 600);
     }
   };
   useEffect(() => {

@@ -12,9 +12,9 @@ export default function Footer() {
                     <li>
                         <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
                     </li>
-                    <li>
+                    {/* <li>
                         <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
-                    </li>
+                    </li> */}
                     <li>
                         <a href="#" class="mr-4 hover:underline md:mr-6 underline">Rules</a>
                     </li>
@@ -24,8 +24,9 @@ export default function Footer() {
                 </ul>
             </div>
             <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">©  <a href="https://flowbite.com/" class="hover:underline">crackDSA</a>. All Rights Reserved.
+            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">©  <a href="https://crackdsa.com/" class="hover:underline">crackDSA</a>. All Rights Reserved.
             </span>
+            
         </footer>
 
     )
