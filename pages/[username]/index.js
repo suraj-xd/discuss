@@ -54,7 +54,7 @@ export default function UserProfilePage({ user, posts }) {
       <UserProfile user={user} />
       
       <PostFeed posts={posts} />
-      <br></br>
+      <br></br><hr></hr>
       {username && <>
           <span className='flex'>
           <p className='font-bold ml-4 mt-8'>Sign Out</p>

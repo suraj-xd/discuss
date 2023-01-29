@@ -1,10 +1,12 @@
 import PostFeed from '@components/PostFeed';
 import Metatags from '@components/Metatags';
-import Loader from '@components/Loader';
+import Footer from '@components/Footer';
+
 import { firestore, fromMillis, postToJSON } from '@lib/firebase';
 
 import { useState , useEffect} from 'react';
 import { toast } from 'react-hot-toast';
+import debounce from 'lodash.debounce';
 
 // Max post to query per page
 const LIMIT = 10;
@@ -49,8 +51,8 @@ export default function Home(props) {
     setLoading(false);
     
     if (newPosts.length < LIMIT) {
-      toast("No More Posts!",{"icon":"🕸️"});
       setPostsEnd(true);
+      toast("No More Posts!",{"icon":"🕸️"});
     }
   };
   useEffect(() => {
@@ -65,6 +67,7 @@ export default function Home(props) {
  }, [posts])
 
   return (
+    <>
     <main>
       <Metatags title="Home Page" description="Get the latest posts on our site" />
 
@@ -72,11 +75,12 @@ export default function Home(props) {
      
       <PostFeed posts={posts} />
 
-      {!loading && !postsEnd && <button onClick={getMorePosts}>Load More</button>}
-
+      {/* {!loading && !postsEnd && <button onClick={getMorePosts}>Load More</button>} */}
       {/* <Loader show={loading} /> */}
+      {/* {postsEnd && <p className='text-center '>You have reached the End! 🕸️</p>} */}
 
-      {postsEnd && <p className='text-center '>You have reached the End!</p>}
     </main>
+      <Footer/>
+    </>
   );
 }
