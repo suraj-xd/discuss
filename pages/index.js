@@ -69,7 +69,7 @@ export default function Home(props) {
   return (
     <>
     <main>
-      <Metatags title="Home Page" description="Get the latest posts on our site" />
+      <Metatags title="Discuss | crackDSA" description="Latest Blogs about Coding, DSA, Development" />
 
       
      
