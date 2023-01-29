@@ -3,7 +3,7 @@ import Head from 'next/head';
 export default function Metatags({
   title = 'Discuss / crackDSA',
   description = '',
-  image = '',
+  image = 'https://firebasestorage.googleapis.com/v0/b/discuss-62d55.appspot.com/o/cracklogo.png?alt=media&token=32d38331-28ef-48e0-8574-820885a0771a',
 }) {
   return (
     <Head>
