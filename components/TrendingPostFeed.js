@@ -24,7 +24,7 @@ function PostItem({ post, admin = false }) {
           <h1 className='border-l-2 text-base sm:text-xl text-white   border-green-400 pl-2 mt-2 mainfont'>
             <a className='' >{post.title}</a>
           </h1 >
-          <p style={{ "width": "60%" }} className='p-2 overflow-hidden whitespace-nowrap text-gray-300 '>Dannie Vinther digs into a way of deal. some other demo text.
+          <p style={{ "width": "60%" }} className='p-2 overflow-hidden whitespace-nowrap text-gray-300 '>{post?.description}
           </p>
           <ul className='decoration-none flex mr-2  '>
             <li className='bg-blue-100 m-2 rounded-lg p-1 text-xs text-gray-800 '>#leetcode</li>
