@@ -41,7 +41,14 @@ function CreateNewPost() {
   const router = useRouter();
   const { username } = useContext(UserContext);
   const [title, setTitle] = useState('');
+  const [desc, setDesc] = useState('');
 
+  const [isAdmin, setAdmin] = useState(false);
+  
+  let adminsName = ['surajgaud','abhinavawasthi','anish'];
+  if(adminsName.includes(username) && !isAdmin){
+    setAdmin(true);
+  }
   // Ensure slug is URL safe
   const slug = encodeURI(kebabCase(title));
 
@@ -50,8 +57,14 @@ function CreateNewPost() {
 
   // Create a new post in firestore
   const createPost = async (e) => {
+    if(title=="notifications"){
+      // Bug here
+      toast.error('Could Not Process!'); 
+      router.reload(); 
+    }
     e.preventDefault();
     const uid = auth.currentUser.uid;
+    
     const ref = firestore.collection('users').doc(uid).collection('posts').doc(slug);
 
     // Tip: give all fields a default value here
@@ -65,6 +78,7 @@ function CreateNewPost() {
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
       heartCount: 0,
+      description: desc
     };
 
     await ref.set(data);
@@ -74,7 +88,38 @@ function CreateNewPost() {
     // Imperative navigation after doc is set
     router.push(`/admin/${slug}`);
   };
+  const createPost1 = async (e) => {
+    if(title=="notifications"){
+      // Bug here
+      toast.error('Could Not Process!'); 
+      router.reload(); 
+    }
+    e.preventDefault();
+    const uid = auth.currentUser.uid;
+    
+    const ref = firestore.collection('users').doc(uid).collection('posts').doc(slug);
 
+    // Tip: give all fields a default value here
+    const data = {
+      title,
+      slug,
+      uid,
+      username,
+      published: false,
+      content: 'Your Blog Content Goes here..',
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+      heartCount: 0,
+      description: desc
+    };
+
+    await ref.set(data);
+
+    toast.success('Post created!');
+
+    // Imperative navigation after doc is set
+    router.push(`/admin/${slug}`);
+  };
   return (
     <form className='bg-gray-300 rounded mt-3 p-5 border-gray-400 border-2' onSubmit={createPost}>
       <input 
@@ -82,6 +127,13 @@ function CreateNewPost() {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Write a title"
+        // className={styles.input}
+      />
+      <input 
+        className='rounded bg-gray-200 mt-1 mb-1 pb-2 pt-2 text-black'
+        value={desc}
+        onChange={(e) => setDesc(e.target.value)}
+        placeholder="Description (Optional)"
         // className={styles.input}
       />
       {/* <p>

@@ -9,6 +9,7 @@ export async function getStaticProps({ params }) {
   const { username, slug } = params;
   const userDoc = await getUserWithUsername(username);
   
+  
   let post;
   let path;
 
@@ -46,11 +47,10 @@ export async function getStaticPaths() {
 }
 
 export default function Post(props) {
-
+  console.log(props);
   const postRef = firestore.doc(props.path);
   const [realtimePost,loading] = useDocumentData(postRef);
   const post = realtimePost || props.post;
-  const r = useRouter();
   
 
   return (

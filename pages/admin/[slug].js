@@ -2,8 +2,8 @@ import styles from '@styles/Admin.module.css';
 import AuthCheck from '@components/AuthCheck';
 import { firestore, auth, serverTimestamp } from '@lib/firebase';
 import ImageUploader from '@components/ImageUploader';
-
-import { useState } from 'react';
+import { UserContext } from '@lib/context';
+import { useState , useContext} from 'react';
 import { useRouter } from 'next/router';
 
 import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
@@ -25,12 +25,19 @@ export default function AdminPostEdit(props) {
 function PostManager() {
   const [preview, setPreview] = useState(false);
 
+
+
   const router = useRouter();
   const { slug } = router.query;
 
   const postRef = firestore.collection('users').doc(auth.currentUser.uid).collection('posts').doc(slug);
   const [post] = useDocumentDataOnce(postRef);
   
+
+  const { username } = useContext(UserContext);
+
+  
+
   return (
     <>
       <main className={styles.container}>
@@ -76,12 +83,13 @@ function PostForm({ defaultValues, postRef, preview }) {
 
   const { isValid, isDirty } = formState;
   const router = useRouter();
-
+  const [isTrend,setTrend] = useState(false);
   const updatePost = async ({ content, published }) => {
     await postRef.update({
       content,
       published,
       updatedAt: serverTimestamp(),
+      trending:isTrend
     });
     
     reset({ content, published });
@@ -89,7 +97,13 @@ function PostForm({ defaultValues, postRef, preview }) {
     toast.success('Post updated successfully!');
     router.push('/admin');
   };
-
+  const { username } = useContext(UserContext);
+  const [isAdmin, setAdmin] = useState(false);
+  
+  let adminsName = ['surajgaud','abhinavawasthi','anish'];
+  if(adminsName.includes(username) && !isAdmin){
+    setAdmin(true);
+  }
   return (
     <form onSubmit={handleSubmit(updatePost)}>
       {preview && (
@@ -117,6 +131,13 @@ function PostForm({ defaultValues, postRef, preview }) {
           <input className="w-auto p-2 m-2 shadow " name="published" type="checkbox" ref={register} />
           <label>Published</label>
         </fieldset>
+        {isAdmin && 
+        <fieldset>
+          <input onClick={()=>setTrend(!isTrend)} className="w-auto p-2 m-2 shadow " name="published" type="checkbox" />
+          <label>Trending</label>
+        </fieldset>
+        }
+        
 
         <button type="submit" className="btn-green shadow-xl shadow-gray-200" disabled={!isDirty || !isValid}>
           Save Changes
