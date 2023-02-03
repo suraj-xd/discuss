@@ -8,7 +8,7 @@ import { firestore, fromMillis, postToJSON } from '@lib/firebase';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import debounce from 'lodash.debounce';
-import NewComp from './NewComp';
+import NewComp from '../components/NewComp';
 
 // Max post to query per page
 const LIMIT = 10;
