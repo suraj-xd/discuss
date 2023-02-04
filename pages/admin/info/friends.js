@@ -1,8 +1,8 @@
-import { firestore, auth } from "@lib/firebase"
+import { firestore, auth } from "../../../lib/firebase";
 import Link from "next/link";
 import { useCollection } from "react-firebase-hooks/firestore"
 export default function Friends() {
-    const uid = auth.currentUser.uid;
+    const uid = auth?.currentUser?.uid;
     const [realtimeFriends, loading] = useCollection(firestore.collection("users").doc(uid).collection('friends'))
 
     return (

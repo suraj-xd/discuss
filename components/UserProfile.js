@@ -1,7 +1,7 @@
 import { SaveIcon, StarIcon ,BookmarkIcon } from "@heroicons/react/solid";
 
 import { UserContext } from "@lib/context";
-import { firestore, auth } from "@lib/firebase";
+import { firestore, auth } from "../lib/firebase";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { useCollection, useCollectionOnce } from "react-firebase-hooks/firestore";
@@ -10,10 +10,11 @@ import toast from "react-hot-toast";
 // UI component for user profile
 export default function UserProfile({ user }) {
 
+  const uid = auth?.currentUser?.uid;
   const { username } = useContext(UserContext);
-  const uid = auth.currentUser.uid;
   const [isFriend, setFriend] = useState(false);
   const [realtimePosts] = useCollection(firestore.collection("users").doc(uid).collection('friends'));
+
   useEffect(() => {
     setFriend(false);
     realtimePosts?.docs.map((doc) => {
@@ -65,7 +66,7 @@ export default function UserProfile({ user }) {
 
           {user.username == username && <>
           <Link href={"/admin/info/friends"}>
-            <p className="mt-2 bg-purple-300 p-2 rounded-md shadow-lg text-gray-800">My friends ⭐</p>
+            <p className="mt-2 bg-white border-b-2 border-blue-700 hover:bg-gray-100 hover:scale-105 transition-all ease-in p-2 rounded-md shadow-lg text-gray-800">My friends ⭐</p>
           </Link>
           </>}
       </span>
