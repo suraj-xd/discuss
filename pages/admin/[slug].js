@@ -85,11 +85,14 @@ function PostForm({ defaultValues, postRef, preview }) {
   const router = useRouter();
   const [isTrend,setTrend] = useState(false);
   const updatePost = async ({ content, published }) => {
+    const tags = content.split(' ').filter(v=> v.startsWith('#'))
+    if(tags.length > 3) tags.slice(0,3);
     await postRef.update({
       content,
       published,
       updatedAt: serverTimestamp(),
-      trending:isTrend
+      trending:isTrend,
+      tag:tags
     });
     
     reset({ content, published });

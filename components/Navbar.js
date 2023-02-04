@@ -29,7 +29,7 @@ export default function Navbar() {
           <>
             <li className='absolute right-16 mr-1 font-mono '>
               <span className='flex'>
-                <Link href={`/admin/notifications`}>
+                <Link href={`/admin/info/notifications`}>
 
                   <h3 className='bg-black mr-2 flex text-white p-3 hover:bg-gray-800 shadow-sm shadow-blue-400  rounded-xl cursor-pointer'>
                     <MailIcon className=' w-5 h-6 ' />

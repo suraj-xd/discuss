@@ -24,12 +24,19 @@ function PostItem({ post, admin = false }) {
           </h1 >
           <p style={{ "width": "60%" }} className='p-2 overflow-hidden whitespace-nowrap text-gray-600 '>{post.description}
           </p>
-          <ul className='decoration-none flex mr-2  '>
-            <li className='bg-blue-200 m-2 rounded-lg p-1 text-sm text-gray-800 '>#leetcode</li>
-            <li className='bg-blue-200 m-2 rounded-lg p-1 text-sm text-gray-800'>#editorial</li>
-            <li className='bg-blue-200 m-2 rounded-lg p-1 text-sm text-gray-800'>#coding</li>
+          <ul className='decoration-none text-sm flex flex-row  overflow-hidden mr-2 w-[80%]  '>
+          {post?.tag?.map((hash) => {
+            return (
+              <>
+              <li className='bg-blue-100 m-2 rounded-lg p-1 text-xs text-gray-800 '>{hash}</li> 
+              </>
+            )
+          }
+            )}
 
-            <span className="push-left flex"> {post.heartCount || 0} <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+
+
+            <span className=" flex flex-row mt-3"> {post.heartCount || 0} <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
               <path fill-rule="evenodd" d="M11.47 4.72a.75.75 0 011.06 0l3.75 3.75a.75.75 0 01-1.06 1.06L12 6.31 8.78 9.53a.75.75 0 01-1.06-1.06l3.75-3.75zm-3.75 9.75a.75.75 0 011.06 0L12 17.69l3.22-3.22a.75.75 0 111.06 1.06l-3.75 3.75a.75.75 0 01-1.06 0l-3.75-3.75a.75.75 0 010-1.06z" clip-rule="evenodd" />
             </svg>
               Upvote</span>

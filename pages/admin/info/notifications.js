@@ -7,10 +7,6 @@ export default function notifications(){
     
     //
     return (
-        <AuthCheck fallback={<span><Login/></span>}>
-        <>
         <Notification/>
-        </>
-        </AuthCheck>
     )
 }

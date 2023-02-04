@@ -1,4 +1,5 @@
 import { firestore, auth, increment } from '@lib/firebase';
+import { useState } from 'react';
 import {  useDocument } from 'react-firebase-hooks/firestore';
 // Allows user to heart or like a post
 
@@ -19,7 +20,6 @@ export default function Heart({ postRef }) {
   // Remove a user-to-post relationship
   const removeHeart = async () => {
     const batch = firestore.batch();
-
     batch.update(postRef, { heartCount: increment(-1) });
     batch.delete(heartRef);
 

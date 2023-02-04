@@ -110,7 +110,8 @@ function CreateNewPost() {
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
       heartCount: 0,
-      description: desc
+      description: desc,
+      tag:[]
     };
 
     await ref.set(data);

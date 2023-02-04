@@ -14,7 +14,7 @@ export default function NewComp({ posts }) {
             <main >
                 <div className='container '>
                     <h1 className='font-bold'>Latest Blog 🔥</h1>
-                    <div className='flex overflow-scroll '>
+                    <div className='flex overflow-x-scroll hide-scroll-bar'>
                         <TrendingPostFeed posts={posts} />
                     </div>
                     <br></br>
