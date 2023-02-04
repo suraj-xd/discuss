@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { useCollection, useCollectionOnce } from "react-firebase-hooks/firestore";
 import toast from "react-hot-toast";
+import AuthCheck from "./AuthCheck";
 
 // UI component for user profile
 export default function UserProfile({ user }) {
@@ -55,6 +56,8 @@ export default function UserProfile({ user }) {
       <p>
         <i>@{user.username}</i>
       </p>
+      <AuthCheck fallback={<></>}>
+
       <span className="flex justify-center items-center">
         <h1 className="font-sans font-bold text-gray-800 mt-3">{user.displayName || 'Anonymous User'}</h1>
         <span className={isFriend ? "text-yellow-400" : "text-white"}>
@@ -70,6 +73,7 @@ export default function UserProfile({ user }) {
           </Link>
           </>}
       </span>
+      </AuthCheck>
       {/* {user.username != username ? (isFriend ? <button onClick={deleteUser}>Delete User</button> : <button onClick={addUser}>Add User</button>) : <></>} */}
     </div>
   );
