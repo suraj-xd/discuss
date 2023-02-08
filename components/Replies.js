@@ -1,4 +1,4 @@
-import { auth } from '@lib/firebase';
+import { auth , getUserWithUsername} from '@lib/firebase';
 import firebase from "firebase";
 import { useContext,  useRef, useState } from 'react';
 import { UserContext } from '@lib/context';
@@ -8,7 +8,6 @@ import Demo from '@components/Demo';
 import toast from 'react-hot-toast';
 // Allows user to heart or like a post
 export default function Replies({ commentRef, currentUser }) {
-    //
     const [isreply, setReply] = useState(false);
 
     const name = useRef();
@@ -39,6 +38,41 @@ export default function Replies({ commentRef, currentUser }) {
             photoURL: user?.photoURL || '/hacker.png',
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
+        const replier = currentUser;
+        if(replier != username){
+            const userRef = await getUserWithUsername(replier );
+            await userRef.ref.collection('notifications').add({
+                type: "reply",
+                user:username,
+                val:name.current.value,
+                photoURL: user?.photoURL,
+                message: `replied on your comment on this post!`,
+                link: window.location.pathname,
+                displayName:user?.displayName,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            })
+        }
+        let tags = name.current.value.split(' ').filter(v => v.startsWith('@'));
+        if (tags.length >= 1) {
+            tags.map(async (tag) => {
+                tag = tag.substr(1,tag.length-1);
+                if (tag != username) {
+                    await getUserWithUsername(tag).then((doc)=>{
+                        if(!doc) return;
+                            doc.ref.collection('notifications').add({
+                                type: "mention",
+                                val: name.current.value,
+                                user: username,
+                                photoURL: user?.photoURL,
+                                message: `mentioned you in a reply on this post!`,
+                                link: window.location.pathname,
+                                displayName:user?.displayName,
+                                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                            })
+                    });
+                }
+            })
+        }
         e.target.reset();
     }
 

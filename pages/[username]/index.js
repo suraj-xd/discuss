@@ -9,6 +9,7 @@ import { UserContext } from '@lib/context';
 import { useRouter } from 'next/router';
 import { auth } from '@lib/firebase';
 import { useState , useContext} from 'react';
+import AuthCheck from '@components/AuthCheck';
 export async function getServerSideProps({ query }) {
   const { username } = query;
 
@@ -55,16 +56,13 @@ export default function UserProfilePage({ user, posts }) {
       
       <PostFeed posts={posts} />
       <br></br><hr></hr>
-      {username && <>
+        {(username != user.username) ? <></> :
           <span className='flex'>
           <p className='font-bold ml-4 mt-8'>Sign Out</p>
           <LogoutIcon onClick={signOut} className='bg-gray-400 text-white icon' />
 
           </span>
-      </>
-          
-      }
-      <br></br><br></br>
+          }
     </main>
   );
 }

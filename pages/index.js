@@ -21,16 +21,9 @@ export async function getServerSideProps(context) {
     .limit(LIMIT);
 
   const posts = (await postsQuery.get()).docs.map(postToJSON);
-  const postsQuery2 = firestore
-    .collectionGroup('trending')
-    .where('published', '==', true)
-    .orderBy('createdAt', 'desc')
-    .limit(5);
-
-  const postsAdmin = (await postsQuery2.get()).docs.map(postToJSON);
-
+  
   return {
-    props: { posts , postsAdmin }, // will be passed to the page component as props
+    props: { posts }, // will be passed to the page component as props
   };
 }
 
@@ -42,7 +35,6 @@ export default function Home(props) {
 
   // Get next page in pagination query
   const getMorePosts = async () => {
-    setLoading(true);
     const last = posts[posts.length - 1];
 
     const cursor = typeof last.createdAt === 'number' ? fromMillis(last.createdAt) : last.createdAt;
@@ -57,7 +49,6 @@ export default function Home(props) {
     const newPosts = (await query.get()).docs.map((doc) => doc.data());
 
     setPosts(posts.concat(newPosts));
-    setLoading(false);
 
     if (newPosts.length < LIMIT) {
       setPostsEnd(true);
@@ -80,7 +71,7 @@ export default function Home(props) {
       <main>
         <Metatags title="Discuss | crackDSA" description="Latest Blogs about Coding, DSA, Development" />
 
-        <NewComp posts={posts} postsAdmin={props.postsAdmin}/>
+        <NewComp posts={posts} />
         {/* <TrendingPostFeed posts={posts} />
         <PostFeed posts={posts} /> */}
 

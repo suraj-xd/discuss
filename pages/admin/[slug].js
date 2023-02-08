@@ -103,7 +103,7 @@ function PostForm({ defaultValues, postRef, preview }) {
   const { username } = useContext(UserContext);
   const [isAdmin, setAdmin] = useState(false);
   
-  let adminsName = ['surajgaud','abhinavawasthi','anish'];
+  let adminsName = ['surajgaud','abhinavawasthi','anishde85'];
   if(adminsName.includes(username) && !isAdmin){
     setAdmin(true);
   }

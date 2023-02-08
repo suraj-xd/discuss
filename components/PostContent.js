@@ -45,7 +45,7 @@ export default function PostContent({ post, postRef }) {
             </Link>
           }
         >
-          <HeartButton postRef={postRef} />
+          <HeartButton postRef={postRef} post={post} />
         </AuthCheck>
 
         {currentUser?.uid === post.uid && (
