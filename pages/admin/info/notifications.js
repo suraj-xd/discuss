@@ -25,9 +25,15 @@ export default function notifications() {
         <>
         <div className='flex justify-center items-center'>
 
-            <div id="dropdownNotification" class="z-20 mt-5 mb-5  w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700" aria-labelledby="dropdownNotificationButton">
-                <div class="block px-4 py-2   font-bold text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
+            <div id="dropdownNotification" class="z-20 mt-5 mb-5 h-screen  w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700" aria-labelledby="dropdownNotificationButton">
+                <div className='flex justify-between items-center'>
+
+                <div class="block px-4 py-2  text-xl font-bold text-center text-gray-700 rounded-t-lg ">
                     Notifications
+                </div>
+                    <div onClick={clearNotification} class="cursor-pointer block px-4 py-2 hover:bg-gray-100 text-md  rounded-2xl mr-1 text-center  text-gray-700 bg-gray-50 dark:bg-gray-800 dark:text-white">
+                    Clear All
+                </div>
                 </div>
                 <div class="divide-y overflow-y-scroll hide-scroll-bar  h-screen divide-gray-100 dark:divide-gray-700">
                 {(realtimeNotifications?.docs.length ==0) ? <p className='text-center text-gray-600 mt-5'>You Have 0 Notifications 🔔</p> : <></> }
@@ -46,9 +52,7 @@ export default function notifications() {
                         View all
                     </div>
                 </a> */}
-                <div onClick={clearNotification} class="block px-4 py-2 hover:bg-gray-100  font-medium text-center rounded-b-lg text-gray-700 bg-gray-50 dark:bg-gray-800 dark:text-white">
-                    Clear All
-                </div>
+                
             </div>
         </div>
 
