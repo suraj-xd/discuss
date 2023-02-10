@@ -29,7 +29,7 @@ function Demo({ username, photoURL, comment, timestamp, replyFlag }) {
                         </div>
 
                         {/* <p className="pt-4 text-black font-bold">{comment}</p> */}
-                        <div className="flex">
+                        <div className="flex flex-wrap">
                         {   
 
                             arr.map((text) => {

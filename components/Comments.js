@@ -57,7 +57,6 @@ export default function Comments({ postRef }) {
         if (tags.length >= 1) {
             tags.map(async (tag) => {
                 tag = tag.substr(1,tag.length-1);
-                console.log(tag);
                 if (tag != username) {
 
                     await getUserWithUsername(tag).then((doc)=>{

@@ -19,16 +19,16 @@ export default function Heart({ postRef ,post}) {
     await batch.commit();
     const commenter = window.location.href.split('/')[3];
     const userRef = await getUserWithUsername(commenter);
-    const msg = (post?.heartCount==0) ? "upvoted your post" : `and ${post?.heartCount} others upvoted your post`;
-    await userRef.ref.collection('notifications').add({
-      type: "upvote",
-      user: username,
-      photoURL: user?.photoURL,
-      message: msg,
-      link: window.location.pathname,
-      displayName: user?.displayName,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    })
+      const msg = (post?.heartCount==0) ? "upvoted your post" : `and ${post?.heartCount} others upvoted your post`;
+      await userRef.ref.collection('notifications').add({
+        type: "upvote",
+        user: username,
+        photoURL: user?.photoURL,
+        message: msg,
+        link: window.location.pathname,
+        displayName: user?.displayName,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      })
   };
 
   // Remove a user-to-post relationship

@@ -28,7 +28,7 @@ function PostItem({ post, admin = false }) {
           {post?.tag?.map((hash) => {
             return (
               <>
-              <li className='bg-blue-100 m-1 rounded-lg p-1 text-xs text-gray-800 '>{hash}</li> 
+              <li className='bg-green-300 m-1 rounded-lg p-1 text-xs text-gray-800 '>{hash}</li> 
               </>
             )
           }

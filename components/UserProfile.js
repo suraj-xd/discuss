@@ -14,7 +14,7 @@ import Username from "pages/api/[username]";
 export default function UserProfile({ user }) {
 
   const uid = auth?.currentUser?.uid;
-  const { username } = useContext(UserContext);
+  const {use, username } = useContext(UserContext);
   const [isFriend, setFriend] = useState(false);
   // const [realtimePosts] = useCollection(firestore.collection("users").doc(uid).collection('friends'));
   // setFriend(false);
@@ -31,7 +31,7 @@ export default function UserProfile({ user }) {
               }
             })
           })   
-  }, [isFriend])
+  }, [username,isFriend])
   async function submit() {
     if (isFriend) {
 
@@ -55,18 +55,21 @@ export default function UserProfile({ user }) {
         displayName: user.displayName
       });
       toast(`${user.displayName} and you are friends now!`, { "icon": "🫱🏼‍🫲🏻" })
-      const commenter = window.location.href.split('/')[3];
-      const userRef = await getUserWithUsername(commenter);
-
-      await userRef.ref.collection('notifications').add({
-        type: "friend",
-        user: user.username,
-        photoURL: user?.photoURL,
-        message: "added you as their friend",
-        link: window.location.pathname,
-        displayName: user?.displayName,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      })
+      try {
+        const commenter = window.location.href.split('/')[3];
+        const userRef = await getUserWithUsername(commenter);
+          await userRef.ref.collection('notifications').add({
+            type: "friend",
+            user: use?.username,
+            photoURL: use?.photoURL,
+            message: "added you as their friend",
+            link: window.location.pathname,
+            displayName: use?.displayName,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          })
+      } catch (error) {
+        console.error("Some error occured");
+      }
       makeFriend(true);
     }
   }

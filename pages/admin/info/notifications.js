@@ -34,7 +34,6 @@ export default function notifications() {
 
                     {
                         realtimeNotifications?.docs.map((doc) => {
-                            console.log(doc.data().link);
                             return (
                                 <Notification type={doc.data().type} doc={doc}/>
                             )
